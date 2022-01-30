@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include <kt/Timer.h>
 #include <kt/Logging.h>
 #include <kt/Vec3.h>
@@ -14,8 +16,6 @@
 #include "Scene.h"
 #include "SponzaScene.h"
 
-#include "microprofile.h"
-
 int main(int argc, char** argv)
 {
 	sr::input::Init();
@@ -27,25 +27,21 @@ int main(int argc, char** argv)
 	uint32_t logDtCounter = 0;
 	sr::Scene* scene = nullptr;
 	sr::Obj::Model model;
-	//scene = new sr::SimpleModelScene("Models/dragon.obj", sr::Obj::LoadFlags::FlipWinding);
-	//scene = new sr::SimpleModelScene("Models/bunny.obj", sr::Obj::LoadFlags::FlipWinding);
-	//scene = new sr::SimpleModelScene("Models/cube/cube.obj", sr::Obj::LoadFlags::FlipWinding);
-	scene = new sr::SponzaScene("Models/sponza-crytek/sponza.obj", sr::Obj::LoadFlags::FlipWinding | sr::Obj::LoadFlags::FlipUVs);
-	//scene = new sr::SimpleModelScene("Models/teapot/teapot.obj", sr::Obj::LoadFlags::FlipWinding);
-	//scene = new sr::SimpleModelScene("Models/lost_empire/lost_empire.obj", sr::Obj::LoadFlags::FlipWinding | sr::Obj::LoadFlags::FlipUVs);
-
+	if (argc < 2) {
+	  std::cerr << "Expected scene path";
+	}
+	std::string file = argv[1];
+	if (false && file.find("sponza") == std::string::npos) {
+	  scene = new sr::SimpleModelScene(file.c_str(), sr::Obj::LoadFlags::FlipWinding);
+	} else {
+	  scene = new sr::SponzaScene(file.c_str(), sr::Obj::LoadFlags::FlipWinding | sr::Obj::LoadFlags::FlipUVs);
+	}
 	scene->Init(sr::Config::c_screenWidth, sr::Config::c_screenHeight);
 
 	kt::Duration frameTime = kt::Duration::FromMilliseconds(16.0);
 
 	sr::RenderContext renderCtx;
 	sr::FrameBuffer framebuffer(sr::Config::c_screenWidth, sr::Config::c_screenHeight);
-
-	MicroProfileOnThreadCreate("Main");
-	MicroProfileSetEnableAllGroups(true);
-	MicroProfileSetForceMetaCounters(true);
-	MicroProfileStartContextSwitchTrace();
-
 
 	while (!window.WantsQuit())
 	{
@@ -77,16 +73,12 @@ int main(int argc, char** argv)
 
 		if (++logDtCounter % 10 == 0)
 		{
-			KT_LOG_INFO("Frame took: %.3fms", frameTime.Milliseconds());
+			KT_LOG_INFO("Frame took: %.3fms fps %f", frameTime.Milliseconds(), 1000.0f / frameTime.Milliseconds());
 		}
-
-		MicroProfileFlip(0);
 	}
 
 	renderCtx.Shutdown();
 
 	delete scene;
 	sr::input::Shutdown();
-
-	MicroProfileShutdown();
 }

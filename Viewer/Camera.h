@@ -54,12 +54,13 @@ struct FreeCamController
 
 	Camera& GetCam();
 	Camera const& GetCam() const;
-
-private:
+	~FreeCamController();
+public:
 	float m_speedMult = 1.0f;
 
 	kt::Quat m_camQuat = kt::Quat::Identity();
 	kt::Vec3 m_camPos = kt::Vec3(0.0f);
+	kt::Vec2 m_camRot = kt::Vec2(0.0f);
 
 	kt::Vec3 m_frameMovement = kt::Vec3(0.0f);
 

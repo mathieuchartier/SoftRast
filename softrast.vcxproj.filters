@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Viewer">
+      <UniqueIdentifier>{bdbfdb97-96f6-41eb-85c3-555829dff153}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SoftRast">
+      <UniqueIdentifier>{db05c39a-a172-49a0-8dba-f87db9fa30a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\kt">
+      <UniqueIdentifier>{aba08f58-3ec7-401a-8f22-3a8ad069b5c5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Viewer\Camera.cpp">
+      <Filter>Source Files\Viewer</Filter>
+    </ClCompile>
+    <ClCompile Include="Viewer\Input.cpp">
+      <Filter>Source Files\Viewer</Filter>
+    </ClCompile>
+    <ClCompile Include="Viewer\Main.cpp">
+      <Filter>Source Files\Viewer</Filter>
+    </ClCompile>
+    <ClCompile Include="Viewer\Obj.cpp">
+      <Filter>Source Files\Viewer</Filter>
+    </ClCompile>
+    <ClCompile Include="Viewer\Scene.cpp">
+      <Filter>Source Files\Viewer</Filter>
+    </ClCompile>
+    <ClCompile Include="Viewer\SponzaScene.cpp">
+      <Filter>Source Files\Viewer</Filter>
+    </ClCompile>
+    <ClCompile Include="SoftRast\Binning.cpp">
+      <Filter>Source Files\SoftRast</Filter>
+    </ClCompile>
+    <ClCompile Include="SoftRast\Rasterizer.cpp">
+      <Filter>Source Files\SoftRast</Filter>
+    </ClCompile>
+    <ClCompile Include="SoftRast\Renderer.cpp">
+      <Filter>Source Files\SoftRast</Filter>
+    </ClCompile>
+    <ClCompile Include="SoftRast\stb_image.cpp">
+      <Filter>Source Files\SoftRast</Filter>
+    </ClCompile>
+    <ClCompile Include="SoftRast\stb_image_resize.cpp">
+      <Filter>Source Files\SoftRast</Filter>
+    </ClCompile>
+    <ClCompile Include="SoftRast\TaskSystem.cpp">
+      <Filter>Source Files\SoftRast</Filter>
+    </ClCompile>
+    <ClCompile Include="SoftRast\Texture.cpp">
+      <Filter>Source Files\SoftRast</Filter>
+    </ClCompile>
+    <ClCompile Include="kt\src\kt\Concurrency.cpp">
+      <Filter>Source Files\kt</Filter>
+    </ClCompile>
+    <ClCompile Include="kt\src\kt\DebugAllocator.cpp">
+      <Filter>Source Files\kt</Filter>
+    </ClCompile>
+    <ClCompile Include="kt\src\kt\File.cpp">
+      <Filter>Source Files\kt</Filter>
+    </ClCompile>
+    <ClCompile Include="kt\src\kt\FilePath.cpp">
+      <Filter>Source Files\kt</Filter>
+    </ClCompile>
+    <ClCompile Include="kt\src\kt\Hash.cpp">
+      <Filter>Source Files\kt</Filter>
+    </ClCompile>
+    <ClCompile Include="kt\src\kt\LinearAllocator.cpp">
+      <Filter>Source Files\kt</Filter>
+    </ClCompile>
+    <ClCompile Include="kt\src\kt\Logging.cpp">
+      <Filter>Source Files\kt</Filter>
+    </ClCompile>
+    <ClCompile Include="kt\src\kt\Memory.cpp">
+      <Filter>Source Files\kt</Filter>
+    </ClCompile>
+    <ClCompile Include="kt\src\kt\Serialization.cpp">
+      <Filter>Source Files\kt</Filter>
+    </ClCompile>
+    <ClCompile Include="kt\src\kt\StackTrace.cpp">
+      <Filter>Source Files\kt</Filter>
+    </ClCompile>
+    <ClCompile Include="kt\src\kt\Strings.cpp">
+      <Filter>Source Files\kt</Filter>
+    </ClCompile>
+    <ClCompile Include="kt\src\kt\Timer.cpp">
+      <Filter>Source Files\kt</Filter>
+    </ClCompile>
+    <ClCompile Include="Viewer\Platform\Input_Win32.cpp">
+      <Filter>Source Files\Viewer</Filter>
+    </ClCompile>
+    <ClCompile Include="Viewer\Platform\Window_Win32.cpp">
+      <Filter>Source Files\Viewer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Viewer\Camera.h">
+      <Filter>Source Files\Viewer</Filter>
+    </ClInclude>
+    <ClInclude Include="Viewer\Input.h">
+      <Filter>Source Files\Viewer</Filter>
+    </ClInclude>
+    <ClInclude Include="Viewer\Obj.h">
+      <Filter>Source Files\Viewer</Filter>
+    </ClInclude>
+    <ClInclude Include="Viewer\Scene.h">
+      <Filter>Source Files\Viewer</Filter>
+    </ClInclude>
+    <ClInclude Include="Viewer\Shaders.h">
+      <Filter>Source Files\Viewer</Filter>
+    </ClInclude>
+    <ClInclude Include="Viewer\SponzaScene.h">
+      <Filter>Source Files\Viewer</Filter>
+    </ClInclude>
+    <ClInclude Include="SoftRast\Binning.h">
+      <Filter>Source Files\SoftRast</Filter>
+    </ClInclude>
+    <ClInclude Include="SoftRast\Config.h">
+      <Filter>Source Files\SoftRast</Filter>
+    </ClInclude>
+    <ClInclude Include="SoftRast\Rasterizer.h">
+      <Filter>Source Files\SoftRast</Filter>
+    </ClInclude>
+    <ClInclude Include="SoftRast\Renderer.h">
+      <Filter>Source Files\SoftRast</Filter>
+    </ClInclude>
+    <ClInclude Include="SoftRast\SIMDUtil.h">
+      <Filter>Source Files\SoftRast</Filter>
+    </ClInclude>
+    <ClInclude Include="SoftRast\SoftRastTypes.h">
+      <Filter>Source Files\SoftRast</Filter>
+    </ClInclude>
+    <ClInclude Include="SoftRast\stb_image.h">
+      <Filter>Source Files\SoftRast</Filter>
+    </ClInclude>
+    <ClInclude Include="SoftRast\stb_image_resize.h">
+      <Filter>Source Files\SoftRast</Filter>
+    </ClInclude>
+    <ClInclude Include="SoftRast\TaskSystem.h">
+      <Filter>Source Files\SoftRast</Filter>
+    </ClInclude>
+    <ClInclude Include="SoftRast\Texture.h">
+      <Filter>Source Files\SoftRast</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\AABB.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\Array.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\Concurrency.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\DebugAllocator.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\File.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\FilePath.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\Handles.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\Hash.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\HashMap.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\HashMapDeclare.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\kt.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\LinearAllocator.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\Logging.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\Macros.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\Mat2.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\Mat3.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\Mat4.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\MathUtil.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\Memory.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\Platform.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\Quat.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\Random.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\Serialization.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\SIMD.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\simd_v4b32.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\simd_v4f32.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\Slice.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\Sort.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\StackTrace.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\StaticFunction.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\Strings.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\Timer.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\Vec2.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\Vec3.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="kt\src\kt\Vec4.h">
+      <Filter>Source Files\kt</Filter>
+    </ClInclude>
+    <ClInclude Include="Viewer\Platform\Input_Win32.h">
+      <Filter>Source Files\Viewer</Filter>
+    </ClInclude>
+    <ClInclude Include="Viewer\Platform\Window_Win32.h">
+      <Filter>Source Files\Viewer</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Viewer\CMakeLists.txt">
+      <Filter>Source Files\Viewer</Filter>
+    </Text>
+    <Text Include="SoftRast\CMakeLists.txt">
+      <Filter>Source Files\SoftRast</Filter>
+    </Text>
+    <Text Include="kt\src\kt\CMakeLists.txt">
+      <Filter>Source Files\kt</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="kt\src\kt\kt.natvis">
+      <Filter>Source Files\kt</Filter>
+    </Natvis>
+  </ItemGroup>
+</Project>

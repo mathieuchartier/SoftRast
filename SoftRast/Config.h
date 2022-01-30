@@ -12,8 +12,8 @@ namespace sr
 namespace Config
 {
 // Todo: not hardcoded.
-constexpr uint32_t c_screenWidth = 1280;
-constexpr uint32_t c_screenHeight = 720;
+constexpr uint32_t c_screenWidth = 1600;
+constexpr uint32_t c_screenHeight = 900;
 
 constexpr uint32_t c_binHeightLog2 = 6;
 constexpr uint32_t c_binWidthLog2 = 6;

@@ -1,6 +1,8 @@
 #include "Camera.h"
 #include "Input.h"
 
+#include <iostream>
+#include <string>
 namespace sr
 {
 
@@ -66,7 +68,7 @@ void FreeCamController::RotateXY(kt::Vec2 const& _xy)
 	kt::Quat roty;
 	roty.FromNormalizedAxisAngle(kt::Vec3(1.0f, 0.0f, 0.0f), _xy.y);
 
-	m_camQuat = m_camQuat * roty * rotx;
+	m_camQuat = m_camQuat * rotx * roty;
 }
 
 void FreeCamController::RotateByMatrix(kt::Mat3 const& _mtx)
@@ -99,6 +101,11 @@ void FreeCamController::UpdateView()
 	m_frameMovement = kt::Vec3(0.0f);
 }
 
+extern bool keydown[256];
+extern int mouse_xpos, mouse_ypos;
+extern bool mouse_down;
+int mouse_lastx = 0, mouse_lasty = 0;
+
 void FreeCamController::UpdateViewGamepad(float const _dt)
 {
 	kt::Vec3 cameraMove(0.0f);
@@ -113,25 +120,26 @@ void FreeCamController::UpdateViewGamepad(float const _dt)
 		m_speedMult *= 0.5f;
 	}
 
-	//if (input::IsDown(input::Key::KeyW))
-	//{
-	//	cameraMove.z += 1.0f * _dt;
-	//}
+  const float speed = 100.0f;
+	if (keydown['W'])
+  {
+	  cameraMove.z += speed * _dt;
+	}
+  
+  if (keydown['S'])
+  {
+	  cameraMove.z -= speed * _dt;
+  }
 
-	//if (input::IsDown(input::Key::KeyS))
-	//{
-	//	cameraMove.z -= 1.0f * _dt;
-	//}
+  if (keydown['A'])
+	{
+	  cameraMove.x -= speed * _dt;
+	}
 
-	//if (input::IsDown(input::Key::KeyA))
-	//{
-	//	cameraMove.x -= 1.0f * _dt;
-	//}
-
-	//if (input::IsDown(input::Key::KeyD))
-	//{
-	//	cameraMove.x += 1.0f * _dt;
-	//}
+	if (keydown['D'])
+  {
+	  cameraMove.x += speed * _dt;
+  }
 
 	kt::Vec2 gamepadMove(0.0f);
 
@@ -148,7 +156,7 @@ void FreeCamController::UpdateViewGamepad(float const _dt)
 
 	gamepadMove *= _dt * m_speedMult;
 
-	Move(cameraMove + kt::Vec3(gamepadMove.x, gamepadMoveY, gamepadMove.y));
+	Move((cameraMove + kt::Vec3(gamepadMove.x, gamepadMoveY, gamepadMove.y)));
 
 	kt::Vec2 gamepadRot(0.0f);
 	gamepadRot.y = -input::GetGamepadAxis(input::GamepadAxis::RightStick_Y);
@@ -160,8 +168,19 @@ void FreeCamController::UpdateViewGamepad(float const _dt)
 		gamepadRot /= gamepadRotLength;
 	}
 
-	RotateXY(gamepadRot * _dt);
-	UpdateView();
+  kt::Vec2 mouse_rot(0.0f);
+  if (mouse_down) {
+    m_camRot.x += float(mouse_xpos - mouse_lastx) / 100.0f;
+    m_camRot.y += float(mouse_ypos - mouse_lasty) / 100.0f;
+  }
+
+  m_camQuat = kt::Quat::Identity();
+  RotateXY(m_camRot + gamepadRot * _dt);
+  
+  UpdateView();
+
+  mouse_lastx = mouse_xpos;
+  mouse_lasty = mouse_ypos;
 }
 
 void FreeCamController::SetProjectionParams(ProjectionParams const& _params)
@@ -184,6 +203,13 @@ Camera const& FreeCamController::GetCam() const
 Camera& FreeCamController::GetCam()
 {
 	return m_camera;
+}
+
+FreeCamController::~FreeCamController() {
+  std::cout << "Camera "
+	<< m_camPos.x << "," << m_camPos.y << "," << m_camPos.z << " "
+	<< m_camRot.x << "," << m_camRot.y << std::endl;
+
 }
 
 }

@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "Obj.h"
 
 #include <stdio.h>
@@ -68,6 +69,7 @@ static void FlipMeshWinding(Mesh& _m, void* _idxBuff)
 		kt::Swap(buff[i + 1], buff[i + 2]);
 	}
 }
+
 
 struct MeshParserState
 {

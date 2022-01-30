@@ -4,14 +4,6 @@
 #include "Renderer.h"
 #include "TaskSystem.h"
 
-#include "microprofile.h"
-
-
-MICROPROFILE_DEFINE(BinTriBatch, "Frontend", "BinTriBatch", MP_ORANGE);
-
-MICROPROFILE_DEFINE_LOCAL_ATOMIC_COUNTER(TrisBinned, "/Frontend/TrisBinned");
-MICROPROFILE_DEFINE_LOCAL_ATOMIC_COUNTER(TrisClipped, "/Frontend/TrisClipped");
-
 namespace sr
 {
 
@@ -310,8 +302,6 @@ static void BinTransformedAndClippedTri
 		return;
 	}
 
-	MICROPROFILE_COUNTER_LOCAL_ADD_ATOMIC(TrisBinned, 1);
-
 	uint32_t xmin, ymin;
 	uint32_t xmax, ymax;
 
@@ -457,13 +447,10 @@ static void BinTransformedAndClippedTri
 
 void BinContext::MicroprofileUpdateCounters()
 {
-	MICROPROFILE_COUNTER_LOCAL_UPDATE_SET_ATOMIC(TrisBinned);
-	MICROPROFILE_COUNTER_LOCAL_UPDATE_SET_ATOMIC(TrisClipped);
 }
 
 void BinTrisEntry(BinContext& _ctx, ThreadScratchAllocator& _alloc, uint32_t _threadIdx, uint32_t _triIdxBegin, uint32_t _triIdxEnd, DrawCall const& _drawCall)
 {
-	MICROPROFILE_SCOPE(BinTriBatch);
 	for (uint32_t triIdx = _triIdxBegin; triIdx < _triIdxEnd; ++triIdx)
 	{
 		KT_ASSERT(triIdx < _drawCall.m_indexBuffer.m_num);
@@ -513,7 +500,6 @@ void BinTrisEntry(BinContext& _ctx, ThreadScratchAllocator& _alloc, uint32_t _th
 		buf.verts[buf.inputIdx][2] = vtx[2];
 
 		{
-			MICROPROFILE_COUNTER_LOCAL_ADD_ATOMIC(TrisClipped, 1);
 			do
 			{
 				uint32_t clipIdx = kt::Cnttz(maskOr);

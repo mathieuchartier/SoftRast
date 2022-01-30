@@ -35,7 +35,7 @@ struct SponzaScene : Scene
 
 	struct Constants
 	{
-		static uint32_t constexpr c_numPointLights = 16;
+		static uint32_t constexpr c_numPointLights = 1;
 
 		__m256 m_sunDir[3];
 		__m256 m_ambCol[3];

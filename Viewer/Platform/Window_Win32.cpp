@@ -8,11 +8,31 @@
 namespace sr
 {
 
-
+  bool keydown[256] = {};
+  int mouse_xpos = 0, mouse_ypos = 0;
+  bool mouse_down = false;
+  
 LRESULT CALLBACK Window_Win32::WndProcHook(HWND _hwnd, UINT _msg, WPARAM _wparam, LPARAM _lparam)
 {
 	switch (_msg)
 	{
+    case WM_KEYDOWN:
+      keydown[_wparam & 0xFF] = true;
+      return TRUE;
+    case WM_KEYUP:
+      keydown[_wparam & 0xFF] = false;
+      return TRUE;
+    case WM_LBUTTONDOWN:
+      mouse_down = true;
+      return TRUE;
+    case WM_LBUTTONUP:
+      mouse_down = false;
+      return TRUE;
+    case WM_MOUSEMOVE:
+      mouse_xpos = LOWORD(_lparam); 
+      mouse_ypos = HIWORD(_lparam);
+      return TRUE;
+    
 		case WM_NCCREATE:
 		{
 			CREATESTRUCT* create = (CREATESTRUCT*)_lparam;

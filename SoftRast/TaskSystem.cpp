@@ -4,8 +4,6 @@
 #include "TaskSystem.h"
 #include "kt/Strings.h"
 
-#include "microprofile.h"
-
 thread_local uint32_t tls_threadIndex;
 
 namespace sr
@@ -80,7 +78,6 @@ void TaskSystem::InitFromMainThread(uint32_t const _numWorkers)
 			ThreadInitData* data = (ThreadInitData*)_self->GetUserData();
 			TaskSystem* sys = data->sys;
 			tls_threadIndex = data->threadId;
-			MicroProfileOnThreadCreate(data->name);
 			std::atomic_fetch_sub_explicit(data->initCounter, 1, std::memory_order_acquire);
 			sys->WorkerLoop(data->threadId);
 		}, 
@@ -179,7 +176,6 @@ void TaskSystem::WaitForCounter(std::atomic<uint32_t>* _counter)
 		}
 	}
 
-	MICROPROFILE_SCOPEI("TaskSystem", "IDLE WAIT FOR COUNTER", MP_RED);
 	while (std::atomic_load_explicit(_counter, std::memory_order_acquire) > 0)
 	{
 		// dumb spin, todo: semaphore wait?
@@ -214,7 +210,6 @@ void TaskSystem::WorkerLoop(uint32_t _threadId)
 	while (std::atomic_load_explicit(&m_keepRunning, std::memory_order_acquire))
 	{
 		{
-			MICROPROFILE_SCOPEI("TaskSystem", "IDLE", MP_RED);
 			m_condVar.wait(lk, [this]() 
 			{
 				return std::atomic_load_explicit(&m_keepRunning, std::memory_order_acquire) == 0 
@@ -241,8 +236,6 @@ void TaskSystem::WorkerLoop(uint32_t _threadId)
 	}
 
 	lk.unlock();
-
-	MicroProfileOnThreadExit();
 }
 
 

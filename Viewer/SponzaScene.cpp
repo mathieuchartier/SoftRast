@@ -111,7 +111,7 @@ void SponzaScene::Init(uint32_t _screenHeight, uint32_t _screenWidth)
 {
 	sr::FreeCamController::ProjectionParams proj;
 	proj.m_aspect = float(sr::Config::c_screenWidth) / float(sr::Config::c_screenHeight);
-	proj.m_fov = kt::ToRadians(85.0f);
+	proj.m_fov = kt::ToRadians(45.0f);
 
 #if SR_USE_REVERSE_Z
 	proj.m_nearPlane = 10000.0f;
@@ -158,6 +158,8 @@ void SponzaScene::Init(uint32_t _screenHeight, uint32_t _screenWidth)
 		anim.m_rotAxis = kt::Normalize(anim.m_rotAxis * 2.0f - kt::Vec3(1.0f));
 		anim.m_rotOffset = 25.0f * (kt::Vec3(kt::RandomUnitFloat(rng), kt::RandomUnitFloat(rng), kt::RandomUnitFloat(rng)) * 2.0f - kt::Vec3(1.0f)) + kt::Vec3(5.0f);
 	}
+	m_camController.m_camPos = kt::Vec3(-10.7024f*100.0f,6.66454f*100.0f,0.585039f*100.0f);
+	m_camController.m_camRot = kt::Vec2(1.50998f,0.0799977f);
 }
 
 void SponzaScene::Update(RenderContext& _ctx, FrameBuffer& _fb, float _dt)

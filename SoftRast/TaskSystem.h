@@ -3,9 +3,9 @@
 #include <mutex>
 #include <condition_variable>
 
-#include "kt/LinearAllocator.h"
-#include "kt/Array.h"
-#include "kt/Concurrency.h"
+#include <kt/LinearAllocator.h>
+#include <kt/Array.h>
+#include <kt/Concurrency.h>
 
 namespace sr
 {

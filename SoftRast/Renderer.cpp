@@ -3,19 +3,6 @@
 #include "kt/Memory.h"
 #include "kt/Logging.h"
 
-#include "microprofile.h"
-
-MICROPROFILE_DEFINE(SubmitDrawCalls, "Frame", "SubmitDrawCalls", MP_STEELBLUE);
-MICROPROFILE_DEFINE(SetupFrontend, "Frame", "SetupFrontend", MP_STEELBLUE1);
-MICROPROFILE_DEFINE(WaitForFrontend, "Frame", "WaitForFrontend", MP_STEELBLUE2);
-MICROPROFILE_DEFINE(SetupBackend, "Frame", "SetupBackend", MP_STEELBLUE3);
-MICROPROFILE_DEFINE(WaitForBackend, "Frame", "WaitForBackend", MP_STEELBLUE4);
-
-MICROPROFILE_DEFINE(ClearFrameBuffer, "Frame", "ClearFrameBuffer", MP_DEEPSKYBLUE);
-
-MICROPROFILE_DEFINE(Blit, "Frame", "Blit", MP_ROYALBLUE);
-
-
 namespace sr
 {
 
@@ -167,8 +154,6 @@ void RenderContext::DrawIndexed(DrawCall const& _call)
 
 void RenderContext::ClearFrameBuffer(FrameBuffer& _buffer, uint32_t _color, bool _clearColour /*= true*/, bool _clearDepth /*= true*/)
 {
-	MICROPROFILE_SCOPE(ClearFrameBuffer);
-
 	KT_ASSERT(_buffer.m_jobs[_buffer.m_writePlane].m_counter.load() == 0);
 
 	// TODO: Fast clear
@@ -202,18 +187,13 @@ void RenderContext::BeginFrame()
 {
 	m_drawCalls.Clear();
 	m_taskSystem.ResetAllocators();
-
-	MICROPROFILE_ENTER(SubmitDrawCalls);
 }
 
 void RenderContext::EndFrame()
 {
-	MICROPROFILE_LEAVE();
-
 	std::atomic<uint32_t> frontEndCounter(0);
 
 	{
-		MICROPROFILE_SCOPE(SetupFrontend);
 		for (uint32_t i = 0; i < m_binner.m_numBinsX * m_binner.m_numBinsY * m_binner.m_numThreads; ++i)
 		{
 			// todo frame number dirty
@@ -253,14 +233,12 @@ void RenderContext::EndFrame()
 	}
 
 	{
-		MICROPROFILE_SCOPE(WaitForFrontend);
 		m_taskSystem.WaitForCounter(&frontEndCounter);
 	}
 
 	std::atomic<uint32_t> tileRasterCounter{ 0 };
 
 	{
-		MICROPROFILE_SCOPE(SetupBackend);
 		for (uint32_t binY = 0; binY < m_binner.m_numBinsY; ++binY)
 		{
 			for (uint32_t binX = 0; binX < m_binner.m_numBinsX; ++binX)
@@ -309,7 +287,6 @@ void RenderContext::EndFrame()
 
 
 	{
-		MICROPROFILE_SCOPE(WaitForBackend);
 		m_taskSystem.WaitForCounter(&tileRasterCounter);
 	}
 
@@ -318,7 +295,6 @@ void RenderContext::EndFrame()
 
 static void BlitJobFn(FrameBuffer::JobData const& _job)
 {
-	MICROPROFILE_SCOPE(Blit);
 	FrameBufferPlane const& plane = *_job.m_plane;
 	uint32_t* fb32 = (uint32_t*)_job.m_linearPixels;
 	for (uint32_t tileY = 0; tileY < plane.m_tilesY; ++tileY)
